@@ -4,17 +4,30 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-let heartObjects = document.getElementsByClassName("like-glyph")
+let heartObjects = document.getElementsByTagName("span")
 for(const heart of heartObjects) {
   heart.addEventListener("click", function(){
+    
     mimicServerCall()
-    debugger
-    if (mimicServerCall == "fulfilled") {
-      console.log("Success")
-    }
-    else {
-      console.log("Failure")
-    }
+      .then(function(serverMessage) {
+        if (heart.innerText == EMPTY_HEART) {
+          heart.className = "activated-heart"
+          heart.innerText = FULL_HEART
+          heart.style.color = "red"
+        }
+        else {
+          heart.className = ""
+          heart.innerText = EMPTY_HEART
+          heart.style.color = ""
+        }
+      })
+      .catch(function(error) {
+        let errorBanner = document.getElementById("modal")
+        errorBanner.className = ""
+        setTimeout(function(){ errorBanner.className = "hidden"; }, 5000)
+        alert("An error has occurred!")
+
+      })
   })
 }
 
