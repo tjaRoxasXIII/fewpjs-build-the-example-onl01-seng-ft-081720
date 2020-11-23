@@ -4,8 +4,19 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
-
+let heartObjects = document.getElementsByClassName("like-glyph")
+for(const heart of heartObjects) {
+  heart.addEventListener("click", function(){
+    mimicServerCall()
+    debugger
+    if (mimicServerCall == "fulfilled") {
+      console.log("Success")
+    }
+    else {
+      console.log("Failure")
+    }
+  })
+}
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
