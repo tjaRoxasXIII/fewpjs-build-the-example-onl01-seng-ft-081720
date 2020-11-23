@@ -7,15 +7,33 @@ const FULL_HEART = '♥'
 let heartObjects = document.getElementsByClassName("like-glyph")
 for(const heart of heartObjects) {
   heart.addEventListener("click", function(){
+    
     mimicServerCall()
-    debugger
-    if (mimicServerCall == "fulfilled") {
-      console.log("Success")
-    }
-    else {
-      console.log("Failure")
-    }
+      .then(function(serverMessage) {
+        if (heart.innerText == EMPTY_HEART) {
+          fullHeart(heart)
+        }
+        else {
+          heart.innerText = EMPTY_HEART
+          heart.style.color = ""
+        }
+      })
+      .catch(function(error) {
+        alert("An error has occurred!")
+      })
   })
+}
+
+function fullHeart(obj) {
+  obj.className = "activated-heart"
+  heart.innerText = FULL_HEART
+  heart.style.color = "red"
+}
+
+function emptyHeart(obj) {
+  obj.className = ""
+  heart.innerText = EMPTY_HEART
+  heart.style.color = ""
 }
 
 //------------------------------------------------------------------------------
